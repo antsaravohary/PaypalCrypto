@@ -1,0 +1,46 @@
+.Paiement {
+    margin-top: 100px;
+    margin-left: 35%;
+}
+  
+.login-box {
+    width:50%;
+    height: auto;
+    padding: 20px;
+    background: #242423;
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px #242423;
+    border-radius: 10px;
+}
+
+.login-box h2 {
+    color: #E8EDDF;
+    text-align: center;
+}
+
+
+.login-box .user-box input {
+    width: 100%;
+    font-size: 16px;
+    color:#E8EDDF;
+    border: none;
+    border-bottom: 1px solid #E8EDDF;
+    outline: none;
+    background: transparent;
+}
+.login-box .user-box label {
+    font-size: 14px;
+    color: #F5CB5C;
+    pointer-events: none;
+    transition: .5s;
+}
+
+button {
+    cursor: pointer;
+    color: #F5CB5C;
+    background-color: #242423;
+    border-style: none;
+}
+
+
+

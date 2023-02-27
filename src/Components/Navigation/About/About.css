@@ -1,0 +1,35 @@
+.about {
+    color: #242423;
+    padding: 50px;
+    width: 100%;
+}
+
+
+.about-block {
+    font-size: 14px;
+    align-items: center;
+}
+
+.page-title {
+    font-size: 40px;
+}
+
+body {
+    color: #242423;
+}
+
+.img-rounded {
+    border-radius: 5px; 
+    width: 25%;
+}
+
+.text {
+    font-size: 15px;
+}
+
+.About video {
+    border-radius: 6px;
+    width: 95%;
+   
+   
+}

@@ -1,0 +1,23 @@
+.footer {   
+    width: 100%;
+    background: #191919;
+}
+
+.foot-liste {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.foots {
+    color: #e8eddf;
+    font-size: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 10px;
+}
+
+
+

@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1, h2, h3, h4, h5, h6 { 
+    font-family:"Open sans", Helvetica, Arial; 
+}
+
+img[Style] {
+  aspect-ratio: auto 800 / 550;
+  height: 550px;
+}
+
+body, html, #root {
+    width: 100%;
+    min-height: 100vh;
+    background: #fcfcfc;
+    overflow-x: hidden;
+  }
+  
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-indicators {
+    bottom: -8px;
+}
+
