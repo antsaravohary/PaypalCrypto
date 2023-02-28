@@ -11,7 +11,7 @@ export default function About() {
 
             <h5 className="text-lg font-semibold lg:pt-6">
               Alertes crypto : comment récupérer votre investissement en
-              cryptomonnaie{" "}
+              cryptomonnaie
             </h5>
             <p className="text-justify mb-1">
               Vous avez envie d’investir dans les cryptomonnaies, mais vous ne

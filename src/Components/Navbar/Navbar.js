@@ -4,11 +4,11 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { GiTakeMyMoney } from 'react-icons/gi';
 import { navTab } from './Navbar.tab.js';
 
-export default function Navbar({onModalChange}) {
+export default function Navbar({ onModalChange }) {
     const [menuOpen, setMenuOpen] = useState(false)
     const [selected, setSelected] = useState(0)
     const navigation = useNavigate();
-    
+
 
     return (
         <nav id="navbar" className="bg-[#191919] w-full fixed top-0 z-50">
@@ -19,16 +19,16 @@ export default function Navbar({onModalChange}) {
                 <div className="hidden space-x-10 lg:flex">
                     {navTab().map((data, index) => (
                         <button key={index} className={`${selected === index ? "text-[#f5cb5c]" : "text-white"} uppercase text-md no-underline cursor-pointer font-black bg-transparent`}
-                        onClick={() => {
-                            navigation(data.url);
-                            setSelected(index);
-                        }}>
+                            onClick={() => {
+                                navigation(data.url);
+                                setSelected(index);
+                            }}>
                             {data.title}
                         </button>
                     ))}
                     <button onClick={() => onModalChange(true)}
                         className="text-md no-underline text-black cursor-pointer font-black bg-[#f5cb5c] rounded-xl px-4 py-2 flex shadow-2xl">
-                        <GiTakeMyMoney className="text-2xl my-auto mr-2"/> 
+                        <GiTakeMyMoney className="text-2xl my-auto mr-2" />
                         J'investi
                     </button>
                 </div>
@@ -41,25 +41,25 @@ export default function Navbar({onModalChange}) {
                     </button>
                 </div>
             </div>
-            {menuOpen && 
-            <div className={`flex flex-col justify-center text-center h-screen space-y-4 items-center bg-[#191919] -mt-10`}>
-                {navTab().map((data, index) => (
-                    <button key={index} onClick={() => {
-                        navigation(data.url);
+            {menuOpen &&
+                <div className={`flex flex-col justify-center text-center h-screen space-y-4 items-center bg-[#191919] -mt-10`}>
+                    {navTab().map((data, index) => (
+                        <button key={index} onClick={() => {
+                            navigation(data.url);
+                            setMenuOpen(false);
+                            setSelected(index)
+                        }}
+                            className={`${selected === index ? "text-[#f5cb5c]" : "text-white"} text-4xl no-underline cursor-pointer font-black bg-transparent`}>{data.title}</button>
+                    ))}
+                    <button onClick={() => {
+                        onModalChange(true);
                         setMenuOpen(false);
-                        setSelected(index)
-                        }} 
-                        className={`${selected === index ? "text-[#f5cb5c]" : "text-white"} text-4xl no-underline cursor-pointer font-black bg-transparent`}>{data.title}</button>
-                ))}
-                <button onClick={() => {
-                    onModalChange(true);
-                    setMenuOpen(false);
-                    }} 
-                    className="text-2xl no-underline text-black cursor-pointer font-black bg-[#f5cb5c] rounded-xl px-8 py-2 mt-5 flex">
-                        <GiTakeMyMoney className="text-3xl my-auto mr-2"/> 
+                    }}
+                        className="text-2xl no-underline text-black cursor-pointer font-black bg-[#f5cb5c] rounded-xl px-8 py-2 mt-5 flex">
+                        <GiTakeMyMoney className="text-3xl my-auto mr-2" />
                         J'investi
-                </button>
-            </div>}
+                    </button>
+                </div>}
 
         </nav>
     )

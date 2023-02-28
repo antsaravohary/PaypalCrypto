@@ -22,10 +22,41 @@ export default function Layout() {
     price: 30,
   };
 
-  const handleApprove = (orderId) => {
-    setPaidFor(true);
+  const initialOptions = {
+    "client-id": process.env.REACT_APP_PAYPAL_KEY,
+    currency: "EUR",
+    intent: "capture",
   };
 
+  // const handleApprove = (orderId) => {
+  //   setPaidFor(true);
+  // };
+
+  const onCreateOrder = (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          description: "Description",
+          amount: {
+            value: "4.99",
+            //currency_code: "EUR",
+          },
+        },
+      ],
+    })
+  }
+
+  const onApproveOrder = (data, actions) => {
+    
+    return actions.order.capture().then((details) => {
+      const name = details.payer.name.given_name;
+      alert(`Transaction completed by ${name}`);
+    });
+  }
+
+  const onError = (data, actions) => {
+    console.log("Error de transaction");
+  };
   const form = useForm({
     initialValues: {
       phone: "",
@@ -37,44 +68,49 @@ export default function Layout() {
     alert(error.message);
   }
 
-  return (
-    <div>
-      <Modal
-        overflow="inside"
-        centered
-        size="lg"
-        opened={opened}
-        onClose={() => setOpened(false)}
-      >
-        <h2 className="text-2xl font-medium"> Informations de paiement</h2>
-        <TextInput
-          label="Téléphone"
-          placeholder="Numéro de téléphone"
-          {...form.getInputProps("phone")}
-        />
-        <TextInput
-          my="md"
-          label="Email"
-          placeholder="email"
-          {...form.getInputProps("email")}
-        />
+  console.log("api paypal client ID:", process.env.REACT_APP_PAYPAL_KEY)
 
-        {isPending && <Loader />}
-        <PayPalScriptProvider
-          options={{
-            "client-id": process.env.REACT_APP_PAYPAL_KEY,
-          }}
+  return (
+    <PayPalScriptProvider options={{
+      "client-id": process.env.REACT_APP_PAYPAL_KEY,
+      currency: "EUR",
+    }}>
+      <div>
+        <Modal
+          overflow="inside"
+          centered
+          size="lg"
+          opened={opened}
+          onClose={() => setOpened(false)}
         >
-          <PayPalButtons />
-        </PayPalScriptProvider>
-      </Modal>
-      <Navbar
-        onModalChange={(isModalActive) => {
-          setOpened(isModalActive);
-        }}
-      />
-      <App />
-      <Footer />
-    </div>
+          <h2 className="text-2xl font-medium"> Informations de paiement</h2>
+          <TextInput
+            label="Téléphone"
+            placeholder="Numéro de téléphone"
+            {...form.getInputProps("phone")}
+          />
+          <TextInput
+            my="md"
+            label="Email"
+            placeholder="email"
+            {...form.getInputProps("email")}
+          />
+
+          {isPending && <Loader />}
+
+          <PayPalButtons
+            createOrder={(data, actions) => onCreateOrder(data, actions)}
+            onApprove={(data, actions) => onApproveOrder(data, actions)}
+          />
+        </Modal>
+        <Navbar
+          onModalChange={(isModalActive) => {
+            setOpened(isModalActive);
+          }}
+        />
+        <App />
+        <Footer />
+      </div>
+    </PayPalScriptProvider>
   );
 }
