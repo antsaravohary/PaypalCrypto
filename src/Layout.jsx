@@ -10,12 +10,16 @@ import {
   PayPalScriptProvider,
   usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
+import { useRecoilState } from "recoil";
+import { ModalState } from "./atom/atom";
 
 export default function Layout() {
   const [opened, setOpened] = useState(false);
-  const [paidFor, setPaidFor] = useState(false);
+  // const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
+  const [modalState, setModalState] = useRecoilState(ModalState);
+
 
   const product = {
     description: "Design+Code React Hooks Course",
@@ -47,16 +51,15 @@ export default function Layout() {
   }
 
   const onApproveOrder = (data, actions) => {
-    
     return actions.order.capture().then((details) => {
       const name = details.payer.name.given_name;
       alert(`Transaction completed by ${name}`);
+      setModalState(true);
+
     });
   }
 
-  const onError = (data, actions) => {
-    console.log("Error de transaction");
-  };
+
   const form = useForm({
     initialValues: {
       phone: "",
