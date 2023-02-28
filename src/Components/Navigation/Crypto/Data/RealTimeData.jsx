@@ -25,17 +25,7 @@ function RealTimeData() {
 
     return (
         <div className='coin-app'>
-            <div className='coin-search'>
-                <h1 className='coin-text font-bold mt-10'>Donnée complète en temps réel</h1>
-                <form>
-                    <input
-                        className='coin-input'
-                        type='text'
-                        onChange={handleChange}
-                        placeholder='Search'
-                    />
-                </form>
-            </div>
+           
             {filteredDatas.map(datas => {
                 return (
                     <DataApp

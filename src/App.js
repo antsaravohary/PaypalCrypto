@@ -13,6 +13,8 @@ import axios from 'axios';
 import ModalGetPhone from './Components/ModalGetPhone/ModalGetPhone';
 import { useSnackbar } from "notistack";
 
+
+
 function App() {
   const [isShowVideo, setIsShowVideo] = useState(false);
   const [isVideoOver, setIsVideoOver] = useState(false);
@@ -106,6 +108,7 @@ const handleSubmit = () => {
         <Route path="/politique-de-confidentialite" element={<Policies />} />
         <Route path="/conditions" element={<Cgu />} />
         <Route path="/mention-legale" element={<LegalNotice />} />
+
       </Routes>
     </div>
   );
