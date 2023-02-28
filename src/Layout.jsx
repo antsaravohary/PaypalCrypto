@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Modal } from "@mantine/core";
 import App from "./App";
 import Navbar from "./Components/Navbar/Navbar";
@@ -12,25 +12,15 @@ import {
 } from "@paypal/react-paypal-js";
 import { useRecoilState } from "recoil";
 import { ModalState } from "./atom/atom";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 export default function Layout() {
   const [opened, setOpened] = useState(false);
   // const [paidFor, setPaidFor] = useState(false);
-  const [error, setError] = useState(null);
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
   const [modalState, setModalState] = useRecoilState(ModalState);
 
-
-  const product = {
-    description: "Design+Code React Hooks Course",
-    price: 30,
-  };
-
-  const initialOptions = {
-    "client-id": process.env.REACT_APP_PAYPAL_KEY,
-    currency: "EUR",
-    intent: "capture",
-  };
 
   // const handleApprove = (orderId) => {
   //   setPaidFor(true);
@@ -40,7 +30,7 @@ export default function Layout() {
     return actions.order.create({
       purchase_units: [
         {
-          description: "Description",
+          description: "Paiement du produit",
           amount: {
             value: "4.99",
             //currency_code: "EUR",
@@ -53,7 +43,8 @@ export default function Layout() {
   const onApproveOrder = (data, actions) => {
     return actions.order.capture().then((details) => {
       const name = details.payer.name.given_name;
-      alert(`Transaction completed by ${name}`);
+      // alert(`Transaction completed by ${name}`);
+      toast.success("Paiement effectué avec succès");
       setModalState(true);
 
     });
@@ -67,11 +58,8 @@ export default function Layout() {
     },
   });
 
-  if (error) {
-    alert(error.message);
-  }
 
-  console.log("api paypal client ID:", process.env.REACT_APP_PAYPAL_KEY)
+
 
   return (
     <PayPalScriptProvider options={{
@@ -79,6 +67,15 @@ export default function Layout() {
       currency: "EUR",
     }}>
       <div>
+        <Toaster toastOptions={{
+          success: {
+            duration: 3000,
+            theme: {
+              primary: 'green',
+              secondary: 'black',
+            },
+          }
+        }} />
         <Modal
           overflow="inside"
           centered

@@ -13,17 +13,15 @@ import axios from 'axios';
 import ModalGetPhone from './Components/ModalGetPhone/ModalGetPhone';
 import { useSnackbar } from "notistack";
 import {
-  RecoilRoot,
-  atom,
-  selector,
   useRecoilState,
-  useRecoilValue,
 } from 'recoil';
 import { ModalState } from './atom/atom';
 
+
+
 function App() {
   const [isShowVideo, setIsShowVideo] = useState(false);
-  const [isVideoOver, setIsVideoOver] = useState(false);
+  //const [isVideoOver, setIsVideoOver] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isModal, setIsModal] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
@@ -33,7 +31,7 @@ function App() {
     setIsShowVideo(true);
     setTimeout(() => {
       setIsShowVideo(false);
-      setIsVideoOver(true);
+      //setIsVideoOver(true);
     }, 64000)
   }, [])
 
@@ -78,46 +76,46 @@ function App() {
   }
 
   return (
-    
-      <div className={`${isModal ? "bg-[rgba(0,0,0,.3)] md:h-screen" : "App w-full h-full mt-5 lg:mt-0"}`}>
-        {isShowVideo && (
-          <div className='fixed w-screen h-screen mx-auto top-0 z-50 bg-black'>
-            <video
-              autoPlay
-              controls
-              preload='true'
-              className="bg-cover w-screen h-full"
-            >
-              <source src={Video} type="video/mp4" />
-            </video>
-            <button
-              className='bg-[#F5CB5C] font-bold py-2 px-4 rounded-md text-[#242423] absolute z-[60] bottom-20 md:bottom-11 xxs:w-56 sm:w-70 left-[50%] translate-x-[-50%] mx-auto'
-              onClick={() => {
-                setIsShowVideo(false);
-                setIsVideoOver(true);
-              }}>
-              Ignorer la présentation
-            </button>
-          </div>
-        )}
 
-        {modalState && (
-          <div className='flex justify-center'>
-            <ModalGetPhone phoneNumber={phoneNumber} handleClose={() => setModalState(false)} handleChange={setPhoneNumber} handleSubmit={handleSubmit} />
-          </div>
-        )}
+    <div className={`${isModal ? "bg-[rgba(0,0,0,.3)] md:h-screen" : "App w-full h-full mt-5 lg:mt-0"}`}>
+      {isShowVideo && (
+        <div className='fixed w-screen h-screen mx-auto top-0 z-50 bg-black'>
+          <video
+            autoPlay
+            controls
+            preload='true'
+            className="bg-cover w-screen h-full"
+          >
+            <source src={Video} type="video/mp4" />
+          </video>
+          <button
+            className='bg-[#F5CB5C] font-bold py-2 px-4 rounded-md text-[#242423] absolute z-[60] bottom-20 md:bottom-11 xxs:w-56 sm:w-70 left-[50%] translate-x-[-50%] mx-auto'
+            onClick={() => {
+              setIsShowVideo(false);
+              //setIsVideoOver(true);
+            }}>
+            Ignorer la présentation
+          </button>
+        </div>
+      )}
 
-        <Routes >
-          <Route path="*" element={<Home />} />
-          <Route path="/a-propos" element={<About />} />
-          <Route path="/cryptomonnaie" element={<Crypto />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/achat" element={<Payment />} />
-          <Route path="/politique-de-confidentialite" element={<Policies />} />
-          <Route path="/conditions" element={<Cgu />} />
-          <Route path="/mention-legale" element={<LegalNotice />} />
-        </Routes>
-      </div>
+      {modalState && (
+        <div className='flex justify-center'>
+          <ModalGetPhone phoneNumber={phoneNumber} handleClose={() => setModalState(false)} handleChange={setPhoneNumber} handleSubmit={handleSubmit} />
+        </div>
+      )}
+
+      <Routes >
+        <Route path="*" element={<Home />} />
+        <Route path="/a-propos" element={<About />} />
+        <Route path="/cryptomonnaie" element={<Crypto />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/achat" element={<Payment />} />
+        <Route path="/politique-de-confidentialite" element={<Policies />} />
+        <Route path="/conditions" element={<Cgu />} />
+        <Route path="/mention-legale" element={<LegalNotice />} />
+      </Routes>
+    </div>
   );
 }
 

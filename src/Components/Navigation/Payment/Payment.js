@@ -18,7 +18,7 @@ const Payment = () => {
                 email,
                 selectAppointement,
             };
-            console.log(user);
+            //console.log(user);
             axios.post('http://localhost/lmk_project/insert.php', user)
                 .then(res => console.log(res.data))
                 .catch(error => {
